@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/sebasvil20/twitter_clone_backend/middlewares"
@@ -15,7 +14,7 @@ import (
 func RouterHandlers() {
 	router := mux.NewRouter().StrictSlash(true)
 
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request)  { fmt.Fprintln(w, "Hello World")}).Methods("GET")
+	router.HandleFunc("/", service.HelloWorld).Methods("GET")
 	router.HandleFunc("/users/register", middlewares.CheckDB(service.RegisterNewUser)).Methods("POST")
 
 	PORT := utils.GotEnvVariable("PORT")
