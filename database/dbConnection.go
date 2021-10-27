@@ -11,7 +11,7 @@ import (
 // MongoConnection connection database object
 var MongoConnection = ConnectToDB()
 
-var clientOptions = options.Client().ApplyURI("mongodb+srv://" + utils.GotEnvVariable("DB_USER") + ":" + utils.GotEnvVariable("DB_PASSWORD") + "@twittercloneapi.bmkwg.mongodb.net/" + utils.GotEnvVariable("DB_NAME") +"?retryWrites=true&w=majority")
+var clientOptions = options.Client().ApplyURI("mongodb+srv://" + utils.GotEnvVariable("DB_USER") + ":" + utils.GotEnvVariable("DB_PASSWORD") + "@twittercloneapi.bmkwg.mongodb.net/" + utils.GotEnvVariable("DB_NAME") + "?retryWrites=true&w=majority")
 
 // ConnectToDB tries to connect to db and return client or the error
 func ConnectToDB() *mongo.Client {

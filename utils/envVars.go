@@ -17,5 +17,3 @@ func GotEnvVariable(key string) string {
 
 	return os.Getenv(key)
 }
-
-
