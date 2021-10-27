@@ -8,9 +8,10 @@ import (
 	"net/http"
 )
 
-func RegisterNewUser(w http.ResponseWriter, r *http.Request){
+func RegisterNewUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var t models.User
+	
 	err := json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
 		http.Error(w, "HttpMessageNotReadable", http.StatusBadRequest)
@@ -34,16 +35,18 @@ func RegisterNewUser(w http.ResponseWriter, r *http.Request){
 	}
 
 	saved, err := repository.SaveNewUser(t)
-	if err != nil || !saved{
+	if err != nil || !saved {
 		http.Error(w, "Couldn't save new user, try again later", http.StatusInternalServerError)
 		return
 	}
+
 	message := models.Message{Message: "User registered succesfully"}
 	jsonMessage, err := json.Marshal(message)
 	if err != nil {
 		http.Error(w, "Couldn't format to json", http.StatusInternalServerError)
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 	_, err2 := w.Write(jsonMessage)
 	if err2 != nil {

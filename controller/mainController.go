@@ -15,7 +15,7 @@ func RouterHandlers() {
 	router := mux.NewRouter().StrictSlash(true)
 	apiPrefix := "api/v1"
 
-	router.HandleFunc(apiPrefix + "/register", middlewares.CheckDB(service.RegisterNewUser)).Methods("POST")
+	router.HandleFunc(apiPrefix+"/register", middlewares.CheckDB(service.RegisterNewUser)).Methods("POST")
 
 	PORT := utils.GotEnvVariable("PORT")
 	if PORT == "" {

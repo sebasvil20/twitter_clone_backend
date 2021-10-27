@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func CheckDB(next http.HandlerFunc) http.HandlerFunc{
-	return func(w http.ResponseWriter, r *http.Request){
+func CheckDB(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		if database.CheckConnection() == 0 {
 			http.Error(w, "Can't connect to database, try again later", http.StatusInternalServerError)
 			return

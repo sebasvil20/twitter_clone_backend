@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func SaveNewUser(user models.User) (bool, error){
+func SaveNewUser(user models.User) (bool, error) {
 
 	rContext, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
@@ -27,9 +27,7 @@ func SaveNewUser(user models.User) (bool, error){
 	return true, nil
 }
 
-
-
-func FindUserByEmail(email string) (models.User, bool, error){
+func FindUserByEmail(email string) (models.User, bool, error) {
 	rContext, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -37,7 +35,7 @@ func FindUserByEmail(email string) (models.User, bool, error){
 	collection := db.Collection("users")
 
 	criteria := bson.M{
-		"email":email,
+		"email": email,
 	}
 
 	var result models.User
@@ -49,5 +47,3 @@ func FindUserByEmail(email string) (models.User, bool, error){
 
 	return result, true, nil
 }
-
-
