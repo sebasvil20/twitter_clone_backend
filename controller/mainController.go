@@ -14,10 +14,9 @@ import (
 //RouterHandlers handle routes and server
 func RouterHandlers() {
 	router := mux.NewRouter().StrictSlash(true)
-	apiPrefix := "api/v1"
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request)  { fmt.Fprintln(w, "Hello World")}).Methods("GET")
-	router.HandleFunc(apiPrefix+"/register", middlewares.CheckDB(service.RegisterNewUser)).Methods("POST")
+	router.HandleFunc("/users/register", middlewares.CheckDB(service.RegisterNewUser)).Methods("POST")
 
 	PORT := utils.GotEnvVariable("PORT")
 	if PORT == "" {
