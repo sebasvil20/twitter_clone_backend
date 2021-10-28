@@ -8,10 +8,12 @@ import (
 
 func ResponseMessage(w http.ResponseWriter, code string, inputMessage string, statusCode int) {
 	message := models.Message{Code: code, Message: inputMessage}
-	jsonMessage, _ := json.Marshal(message)
 	w.WriteHeader(statusCode)
-	_, err2 := w.Write(jsonMessage)
-	if err2 != nil {
-		return
-	}
+	json.NewEncoder(w).Encode(message)
+}
+
+func ResponseJwtToken(w http.ResponseWriter, jwtToken string, statusCode int) {
+	message := models.JwtResponse{JwtToken: jwtToken}
+	w.WriteHeader(statusCode)
+	json.NewEncoder(w).Encode(message)
 }

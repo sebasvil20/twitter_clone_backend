@@ -14,7 +14,7 @@ func RegisterNewUser(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
-		utils.ResponseMessage(w, "HttpMessageNotReadable", "Invalid Email, try again", http.StatusBadRequest)
+		utils.ResponseMessage(w, "HttpMessageNotReadable", "Couldn't read the http body, try again", http.StatusBadRequest)
 		return
 	}
 
