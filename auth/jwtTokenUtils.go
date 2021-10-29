@@ -4,13 +4,11 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/sebasvil20/twitter_clone_backend/models"
 	"github.com/sebasvil20/twitter_clone_backend/utils"
-	"log"
 	"time"
 )
 
 func GenerateJWT(user models.User) (string, error) {
 	secretWord := []byte(utils.GotEnvVariable("JWT_SECRET"))
-	log.Println(string(secretWord))
 
 	payload := jwt.MapClaims{
 		"email":       user.Email,
