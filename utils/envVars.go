@@ -9,9 +9,11 @@ import (
 func GotEnvVariable(key string) string {
 
 	// load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("Error loading .env file")
+	if os.Getenv("SCOPE") == "local" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Println("Error loading .env file")
+		}
 	}
 
 	return os.Getenv(key)
