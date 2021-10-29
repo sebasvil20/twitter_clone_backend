@@ -73,3 +73,37 @@ func FindProfileByID(Id string) (models.User, error) {
 	return profile, nil
 
 }
+
+func UpdateUser(user models.User, ID string) (bool, error) {
+	rContext, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
+	db := database.MongoConnection.Database("twitterclone")
+	collection := db.Collection("users")
+
+	document := make(map[string]interface{})
+
+	document["firstName"] = user.FirstName
+	document["lastName"] = user.LastName
+	document["dateOfBirth"] = user.DateOfBirth
+	document["avatar"] = user.Avatar
+	document["banner"] = user.Banner
+	document["biography"] = user.Biography
+	document["location"] = user.Location
+	document["website"] = user.Website
+
+	updatedString := bson.M{
+		"$set": document,
+	}
+
+	objID, _ := primitive.ObjectIDFromHex(ID)
+	criteria := bson.M{"_id": bson.M{"$eq": objID}}
+
+	_, err := collection.UpdateOne(rContext, criteria, updatedString)
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+
+}
