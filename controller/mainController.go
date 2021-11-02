@@ -20,6 +20,7 @@ func RouterHandlers() {
 	router.HandleFunc("/users/profile", middlewares.CheckDB(middlewares.ValidateJWT(service.GetProfile))).Methods("GET")
 	router.HandleFunc("/users/update", middlewares.CheckDB(middlewares.ValidateJWT(service.ModifyUser))).Methods("PUT")
 	router.HandleFunc("/tweets/new", middlewares.CheckDB(middlewares.ValidateJWT(service.AddNewTweet))).Methods("POST")
+	router.HandleFunc("/tweets", middlewares.CheckDB(middlewares.ValidateJWT(service.TweetsByUserId))).Methods("GET")
 
 	PORT := utils.GotEnvVariable("PORT")
 	if PORT == "" {

@@ -10,7 +10,6 @@ import (
 	"time"
 )
 
-
 func AddNewTweet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var tweet models.Tweet

@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "01742799-fefd-4b1a-9437-f6976d26a50d",
+		"name": "Twitter Clone GO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"sebasvil20@gmail.com\",\n    \"password\": \"9200ornn\",\n    \"firstName\": \"Sebastian\",\n    \"lastName\": \"Villegas\",\n    \"dateOfBirth\": \"2002-08-12T00:00:00Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseRoute}}/users/register",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"jwtToken\", pm.response.json().jwtToken)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"sebasvil20@gmail.com\",\n    \"password\": \"9200ornn\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseRoute}}/users/login",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseRoute}}",
+					"host": [
+						"{{baseRoute}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseRoute}}/users/profile?id=6179fb457f56e37d026aa604",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6179fb457f56e37d026aa604"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Juan Sebastian\",\n    \"lastName\": \"Villegas Contreras\",\n    \"dateOfBirth\": \"2002-08-12T00:00:00Z\",\n    \"biography\" : \"Informatics engineer and code lover. He/Him\",\n    \"website\" : \"sebasvil20.github.io\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseRoute}}/users/update",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"users",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwtToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\" : \"Este es mi segundo tweet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseRoute}}/tweets/new",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"tweets",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tweets by userId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseRoute}}/tweets/new?id=6179fb457f56e37d026aa604&page=1",
+					"host": [
+						"{{baseRoute}}"
+					],
+					"path": [
+						"tweets",
+						"new"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6179fb457f56e37d026aa604"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseRoute",
+			"value": "https://twitter-cloneapi.herokuapp.com/"
+		},
+		{
+			"key": "jwtToken",
+			"value": ""
+		}
+	]
+}

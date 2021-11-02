@@ -11,7 +11,7 @@ func GetProfile(w http.ResponseWriter, r *http.Request) {
 
 	ID := r.URL.Query().Get("id")
 	if len(ID) < 1 {
-		utils.ResponseMessage(w, "IdNeeded", "Id Parameter is mandaroty", http.StatusBadRequest)
+		utils.ResponseMessage(w, "MandatoryParameter", "Id Parameter is mandaroty", http.StatusBadRequest)
 		return
 	}
 
